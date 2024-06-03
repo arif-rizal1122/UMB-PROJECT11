@@ -1,0 +1,1 @@
+\App\Models\Post::factory(100)->recycle(User::factory(5)->create())->create();

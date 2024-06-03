@@ -1,12 +1,8 @@
 <?php
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-
-
-
-
+use App\Models\User;
 
 Route::get('/', function () {
     return view('home', ['title' => 'arif rizal hompage']);
@@ -27,12 +23,14 @@ Route::get('/post', function () {
 
 
 
-Route::get('/post/{slug}', function($slug) {
-    $post = Post::find($slug);
+Route::get('/post/{post:slug}', function (Post $post) {
     return view('detail_post', ['title' => 'sigle post', 'detailPost' => $post]);
 });
 
 
+Route::get('/authors/{user:username}', function(User $user){
+    return view('post', ['title' => count($user->posts) . ' Articles by ' . $user->name, 'post' => $user->posts]);
+});
 
 
 
